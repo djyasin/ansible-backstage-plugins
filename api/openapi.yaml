@@ -689,39 +689,6 @@ components:
 
 
 paths:
-  /context:
-    servers:
-      - url: /api/portal-operations
-    get:
-      operationId: getPortalContext
-      summary: Get authenticated Portal identity and configured organization memberships
-      description: Returns server-resolved memberships for the authenticated user without deriving organization from catalog namespace or accepting client-supplied organization claims.
-      tags: [Portal Operations]
-      security:
-        - JWT: []
-      responses:
-        '200':
-          description: Trusted memberships; a single organizationId is present only when unambiguous
-          content:
-            application/json:
-              schema:
-                type: object
-                required: [userEntityRef, userId]
-                properties:
-                  userEntityRef:
-                    type: string
-                  userId:
-                    type: string
-                  organizationId:
-                    type: string
-                  organizationIds:
-                    type: array
-                    items:
-                      type: string
-        '401':
-          description: User authentication required
-        '403':
-          description: No authorized configured organization membership
   /entitlements/{entitlementId}:
     servers:
       - url: /api/portal-operations
